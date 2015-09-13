@@ -1,7 +1,8 @@
-Meteor.publishComposite("items", function() {
+
+Meteor.publishComposite("tasks", function() {
   return {
     find: function() {
-      return Items.find({});
+      return Tasks.find({});
     }
     // ,
     // children: [
@@ -13,3 +14,4 @@ Meteor.publishComposite("items", function() {
     // ]
   }
 });
+

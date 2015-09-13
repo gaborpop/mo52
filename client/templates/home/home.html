@@ -1,15 +1,14 @@
 <template name="home">
   <div class="template-home">
-    <div class="page-header">
-      <h1>Welcome to Morning 5</h1>
-    </div>
-    <div class="row">
+    
+    <div class="row panelAccueil">
       <div class="col-md-5">
-        <h4>Take five minutes in the morning, enjoy a hot coffee and plan your day ahead</h4>
-        <button type="button" class="btn btn-success">Begin here</button>
+        <h2>Welcome to Morning 5</h2><br />
+        <p class="textAccueil">When you feel overwhelmed, keep calm, drink a coffee and take 5 minutes to write down your tasks.</p><br />
+        <a href="{{ pathFor 'dashboard' }}"><button type="button" class="btn btn-success pull-left">Begin here</button></a>
       </div>
       <div class="col-md-7">
-        hoy
+        <img src="images/coffee.png" width="600">
       </div>
       
     </div>
