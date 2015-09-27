@@ -5,15 +5,15 @@
   color:grey;
 }
 
-p {    
+p {
 font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.panelAccueil {    
+.panelAccueil {
 margin-top:70px;
 }
 
-.footerContainer {    
+.footerContainer {
 margin-top:50px;
 }
 
@@ -29,7 +29,7 @@ margin-top:50px;
   -webkit-border-radius: 3px;
 -moz-border-radius: 3px;
   cursor:pointer;
-  
+
 
 color: #99a1a7;
 }
@@ -54,7 +54,7 @@ top: 0px;
 left: 21px;
 color: green;
 }
-.destroy {
+.destroy, .displayCommand, .archiveCommand {
   cursor:pointer;
 }
 .tomorrow {
@@ -63,4 +63,26 @@ color: green;
 .form-inline .form-group{
     margin-left: 0;
     margin-right: 0;
+}
+.projectsPage {
+margin-top:20px;
+}
+.archivedClass {
+  color:grey;
+}
+.doneTaskClassDisplay {
+  color:grey;
+  text-decoration: line-through;
+}
+.dailyClass {
+  cursor:pointer;
+}
+.assignToProjectClass {
+  cursor:pointer;
+}
+p {
+  font-size: 12px;
+}
+.dailyTask {
+  color:red;
 }

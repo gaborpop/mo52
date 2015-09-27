@@ -1,95 +1,214 @@
 <template name="dashboard">
   <div class="template-dashboard">
-    <div class="page-header">
-      
-    </div>
+
 
     <div class="row">
-      <div class="col-md-2">
-        <p>Ici Backlog tasks</p>      
-      </div>
-      
-      <div class="col-md-10">
-        <ul class="list-group">
-          <p>New tasks:</p>
-          
-            <div class="form-group">
-                
-              <div clss="form-online">
-                <div class="form-group">
-                      
-                    <input type="text" size="50" maxlength="50" class="form-control newTask input-lg" placeholder="New task...">  
-                      
-                </div>
+      <div class="col-md-3">
 
-                <div class="form-group">
-                        <select class="form-control" name="category">
-                            
-                            <option value="0">Project 1</option>
-                            <option value="1">Project 2</option>
-                            <option value="2">Project 3</option>
-                        </select>       
-                </div>
-              </div>  
+        <div class="backlogTaskArea">
+          <p>Ici Backlog tasks</p>
+          <input type="text"  class="form-control newBacklogTask input" placeholder="New backlog task..."><br >
+          {{#each backlogTask1}}
+          <div class="row">
+            <div class="col-md-8">
+              <p>{{ textTask }}</p>
             </div>
-         <form class="form-horizontal"> 
-          <div class="form-group">
-              
-              <div class="col-xs-10">
-                  <div class="form-inline">
-                      <div class="form-group">
-                          <input type="text" class="form-control newTask input-lg" placeholder="New task..."> 
-                      </div>
-                      <div class="form-group">
-                          <select class="form-control" name="category">
-                            
-                            <option value="0">Project 1</option>
-                            <option value="1">Project 2</option>
-                            <option value="2">Project 3</option>
-                        </select>     
-                      </div>
-                      
-                  </div>
-              </div>
+            <div class="col-md-4">
+              <i class="fa fa-times fa-1x destroy"></i>&nbsp;<i class="fa fa-arrow-right assignToProjectClass"></i>
+
+
+
+            </div>
           </div>
-    
-</form>
-          
+          {{/each}}
+        </div>
+
+
+
+
+        <div class="page-header">
+
+        </div>
+        <div class="projectsArea">
+          <p>Ici Projects</p>
+          <input type="text"  class="form-control newProject input" placeholder="New project...">
+          {{#if archivedProjects}}
+
+          <a href="" class="toggle">hide archived projects</a>
+            <br /><br />
+          {{else}}
+          <a href="" class="toggle">display archived projects</a>
+          <br /><br />
+          {{/if}}
+
+
+          {{#each project}}
+          <div class="row">
+            <div class="col-md-8">
+              <p>{{ textTask }}</p>
+            </div>
+            <div class="col-md-4">
+              {{#if activeProject}}
+
+              <i class="fa fa-times fa-1x destroy"></i>&nbsp;<i class="fa fa-folder-open displayCommand"></i>&nbsp;<i class="fa fa-toggle-off fa-1x archiveCommand"></i>
+
+              {{else}}
+              <i class="fa fa-times fa-1x destroy"></i>&nbsp;<i class="fa fa-folder fa-1x displayCommand"></i>&nbsp;<i class="fa fa-toggle-off fa-1x archiveCommand"></i>
+              {{/if}}
+
+            </div>
+
+          </div>
+
+          {{/each}}
+          <div class="page-header">
+
+          </div>
+          {{#if archivedProjects}}
+          {{#each projectArchived}}
+          <div class="row">
+            <div class="col-md-8">
+              <p class="archivedClass">{{ textTask }}</p>
+            </div>
+            <div class="col-md-4">
+              {{#if activeProject}}
+
+              <i class="fa fa-times fa-1x destroy"></i>&nbsp;<i class="fa fa-folder-open displayCommand"></i>&nbsp;<i class="fa fa-toggle-on fa-1x archiveCommand"></i>
+
+              {{else}}
+              <i class="fa fa-times fa-1x destroy"></i>&nbsp;<i class="fa fa-folder fa-1x displayCommand"></i>&nbsp;<i class="fa fa-toggle-on fa-1x archiveCommand"></i>
+              {{/if}}
+
+            </div>
+
+          </div>
+          {{/each}}
+          {{/if}}
+
+
+        </div>
+      </div>
+
+      <div class="col-md-9">
+        <ul class="list-group">
+          <p>Projects :</p>
+          <div class="row">
+            <div class="col-md-3">
+              <select class="form-control nameProject" name="category">
+                {{#each activeproject}}
+                  <p>{{ textTask }} </p>
+                  <input type="checkbox"> Check me out<option value="{{_id }}">{{ textTask }}</option>
+                {{/each}}
+
+
+              </select>
+            </div>
+          <div class="col-md-9">
+            <input type="text"  class="form-control newTask input" placeholder="New task...">
+          </div>
+
+        </div>
+        <div class="row projectsPage">
+          {{#each activeproject}}
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                      <h3 class="panel-title">{{textTask}}</h3>
+
+                    </div>
+                    {{#if displayDoneTasks}}
+                      &nbsp;<a href="" class="toogleDoneTask">hide done task</a>
+                    {{else}}
+                      &nbsp;<a href="" class="toogleDoneTask">show done task</a>
+                    {{/if}}
+
+                    <div class="panel-body">
+
+                      {{#each projectTask}}
+                        <div class="row">
+                          <div class="col-md-1">
+                            <input type="checkbox" class="taskDoneClass">
+                          </div>
+                          <div class="col-md-7">
+                              {{#if editing}}
+                                <textarea class="form-control" id="todo-input" type="text" value="{{textTask}}"></textarea>
+                              {{else}}
+                                {{#if isDaily}}
+                                  <span class="content dailyTask" id="spanIdOnDom" ><p>{{textTask}} </p></span>
+                                {{else}}
+                                  <span class="content" id="spanIdOnDom" ><p>{{textTask}} </p></span>
+                                {{/if}}
+
+                              {{/if}}
+
+                          </div>
+                          <div class="col-md-3">
+
+
+
+                                  {{#if isDaily}}
+                                    <i class="fa fa-arrow-circle-o-up dailyClass" style="color:red"></i>
+                                  {{else}}
+                                    <i class="fa fa-circle-o dailyClass"></i>
+                                  {{/if}}
+                                  <i class="fa fa-times destroy"></i>
+
+
+
+
+                          </div>
+
+                        </div>
+
+
+                      {{/each}}
+                    {{#if displayDoneTasks}}
+                      {{#each projectTaskDone}}
+                        <div class="row">
+                          <div class="col-md-1">
+                                <input type="checkbox" class="taskDoneClass" checked>
+                          </div>
+                          <div class="col-md-9">
+                            <p class="doneTaskClassDisplay">{{textTask}}</p>
+                          </div>
+                          <div class="col-md-1">
+                            <i class="fa fa-times destroy"></i>
+                          </div>
+                        </div>
+
+
+                      {{/each}}
+                    {{/if}}
+                    </div>
+
+                </div>
+            </div>
+          {{/each}}
+        </div>
+
+
+
+
+
+
+
+
+
           {{#each task}}
               {{#if doneTask}}
-                <div class="row">
-                  <div class="col-md-1">
-                    <div class="checkbox3"></div>      
-                  </div>
-                  <div class="col-md-9">
-                    <p>{{ textTask }} </p>     
-                  </div>
-                  <div class="col-md-2">
-                    <p>icones</p>      
-                  </div>
-                </div>  
+
               {{else}}
-                <div class="row">
-                  <div class="col-md-1">
-                    <div class="checkbox2"></div>      
-                  </div>
-                  <div class="col-md-9">
-                    <p>{{ textTask }} </p>      
-                  </div>
-                  <div class="col-md-2">
-                    <i class="fa fa-trash fa-2x destroy"></i>&nbsp;<i class="fa fa-arrow-circle-right fa-2x tomorrow"></i>   
-                  </div>
-                </div> 
+
               {{/if}}
-           
+
           {{/each}}
-         
-        
-        </ul>     
+
+
+        </ul>
       </div>
     </div>
-    
-    
+
+
 
   </div>
 </template>
